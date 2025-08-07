@@ -21,6 +21,8 @@ A lightweight, schema-based configuration portal for ESP32 devices. It provides 
 * Optional reboot via /restart endpoint
 * Config schema served over /schema
 
+<img width="661" height="845" alt="Screenshot 2025-08-07 151257" src="https://github.com/user-attachments/assets/f7f24bfb-dc51-4f3b-87d0-e14131122cfc" />
+
 ## Platform Support
 
 | Platform | Status    |
@@ -43,6 +45,7 @@ LittleFS must be selected as your filesystem in the Arduino Tools menu.
 
 Basic Example:
 ```cpp
+
 #include "ConfigPortal.h"
 #include "schema.h"
 
