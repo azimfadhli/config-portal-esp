@@ -1,7 +1,3 @@
-Got it. Here's the plain unformatted text for your README:
-
----
-
 # ESP32 ConfigPortal
 
 A lightweight, schema-based configuration portal for ESP32 devices. It provides a responsive and customizable web interface to manage device settings in real time. Configurations are defined using a simple JSON schema and persistently stored using LittleFS. Ideal for IoT projects that require runtime configurability with minimal code overhead.
