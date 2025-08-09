@@ -7,7 +7,7 @@ ConfigPortal::ConfigPortal(const char* schema, const char* configPath)
 }
 
 void ConfigPortal::begin() {
-  if (!LittleFS.begin(true)) {
+  if (!LittleFS.begin()) {
     Serial.println("LittleFS Mount Failed");
     return;
   }

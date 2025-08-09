@@ -1,12 +1,21 @@
 #ifndef CONFIG_PORTAL_H
 #define CONFIG_PORTAL_H
 
-#include <Arduino.h>
-#include <AsyncTCP.h>
+//#include <Arduino.h>
+
+// Conditional inclusion for Async TCP and WiFi libraries
+#ifdef ESP32
+  #include <AsyncTCP.h>
+  #include <WiFi.h>
+#elif defined(ESP8266)
+  #include <ESPAsyncTCP.h>
+  #include <ESP8266WiFi.h>
+#endif
+
+// Common libraries for both platforms
 #include <ESPAsyncWebServer.h>
 #include <LittleFS.h>
 #include <ArduinoJson.h>
-#include <WiFi.h>
 
 class ConfigPortal {
 public:
