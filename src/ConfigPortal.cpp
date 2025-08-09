@@ -7,6 +7,8 @@ ConfigPortal::ConfigPortal(const char* schema, const char* configPath)
 }
 
 void ConfigPortal::begin() {
+  
+    Serial.println("");
   if (!LittleFS.begin()) {
     Serial.println("LittleFS Mount Failed");
     return;
@@ -28,7 +30,7 @@ void ConfigPortal::begin() {
 
   _server.on("/restart", HTTP_GET, [](AsyncWebServerRequest* request) {
     request->send(200, "text/plain", "ESP Restarting...");
-    delay(1000);
+    //delay(1000);
     ESP.restart();
   });
 
@@ -242,7 +244,9 @@ void ConfigPortal::servePortal(AsyncWebServerRequest* request) {
   )rawliteral";
 
   JsonDocument schemaDoc;
-  deserializeJson(schemaDoc, _schema);
+  // Copy schema from PROGMEM to RAM
+  String schema(_schema);
+  deserializeJson(schemaDoc, schema);
   JsonArray sections = schemaDoc.as<JsonArray>();
 
   for (JsonObject section : sections) {
@@ -300,7 +304,9 @@ void ConfigPortal::servePortal(AsyncWebServerRequest* request) {
 </body>
 </html>
   )rawliteral";
+ 
+  //replaceMacros(html);
 
-  replaceMacros(html);
+  Serial.println(html.length() );
   request->send(200, "text/html", html);
 }
