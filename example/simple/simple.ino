@@ -1,4 +1,3 @@
-#include <WiFi.h>
 #include <ConfigPortal.h>
 #include "schema.h"
 

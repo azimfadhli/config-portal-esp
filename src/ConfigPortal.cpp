@@ -251,7 +251,7 @@ void ConfigPortal::servePortal(AsyncWebServerRequest* request) {
 
   for (JsonObject section : sections) {
     html += "<fieldset><legend>" + section["section"].as<String>() + "</legend>";
-
+    String formsubmitName;
     JsonArray vars = section["vars"];
     for (JsonObject var : vars) {
       String name = var["name"].as<String>();
@@ -259,10 +259,18 @@ void ConfigPortal::servePortal(AsyncWebServerRequest* request) {
       String type = var["type"].as<String>();
       String defaultValue = var["default"].as<String>();
       String currentValue = processor(name);
+      String next = var["next"].as<String>();
 
       if (currentValue == "") currentValue = defaultValue;
 
-      html += "<form action=\"/set\" target=\"hidden-form\">";
+      if (next == "middle" || next == "last") {
+        // skip form tag for middle and last
+      } else if (next == "first") {
+        html += "<form action=\"/set\" target=\"hidden-form\">";
+      } else {  // default when not specified
+        html += "<form action=\"/set\" target=\"hidden-form\">";
+      }
+
       html += "<label for=\"" + name + "\">" + label + "</label>";
       html += "<div class=\"current-value\">Current value: " + currentValue + "</div>";
 
@@ -288,10 +296,19 @@ void ConfigPortal::servePortal(AsyncWebServerRequest* request) {
         html += "<input type=\"" + type + "\" name=\"" + name + "\" id=\"" + name + "\" value=\"" + currentValue + "\" placeholder=\"Enter " + label + "\" " + attribs + ">";
       }
 
-      html += "<input type=\"submit\" value=\"Update " + name + "\" onclick=\"submitMessage()\">";
-      html += "</form><br>";
+      if (next == "first" || next == "middle") {
+        // skip form tag for first and middle
+        formsubmitName += name + ", ";
+      } else if (next == "last") {
+        html += "<input type=\"submit\" value=\"Update " + formsubmitName + name + "\" onclick=\"submitMessage()\">";
+        html += "</form><br>";
+        formsubmitName = "";
+      } else {  // default when not specified
+        html += "<input type=\"submit\" value=\"Update " + name + "\" onclick=\"submitMessage()\">";
+        html += "</form><br>";
+      }
     }
-    html += "</fieldset>";
+    html += "</fieldset><br>";
   }
 
   html += R"rawliteral(

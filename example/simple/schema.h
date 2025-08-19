@@ -9,19 +9,22 @@ const char CONFIG_SCHEMA[] PROGMEM = R"json([
         "name": "st_ssid",
         "label": "Name for WLAN",
         "type": "text",
-        "default": ""
+        "default": "",
+        "next": "first"
       },
       {
         "name": "st_pass",
         "label": "Password for WLAN",
         "type": "password",
-        "default": ""
+        "default": "",
+        "next": "middle"
       },
       {
         "name": "host_name",
         "label": "Host name to use for MDNS and AP<br>{mac} will be replaced with device's mac id",
         "type": "text",
-        "default": "configAssist_{mac}"
+        "default": "configAssist_{mac}",
+        "next": "last"
       }
     ]
   },
@@ -32,7 +35,8 @@ const char CONFIG_SCHEMA[] PROGMEM = R"json([
         "name": "app_name",
         "label": "Name your application",
         "type": "text",
-        "default": "ConfigAssistDemo"
+        "default": "ConfigAssistDemo",
+        "next": "single"
       },
       {
         "name": "led_buildin",
