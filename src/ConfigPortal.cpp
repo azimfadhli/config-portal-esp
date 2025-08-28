@@ -146,17 +146,22 @@ void ConfigPortal::servePortal(AsyncWebServerRequest* request) {
     h1 {
       color: #4CAF50;
     }
+    fieldset {
+      border-radius: 5px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
     .form-container {
       background-color: #fff;
       border-radius: 10px;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
       padding: 20px;
-      max-width: 600px;
+      max-width: 800px;
       margin: 0 auto;
     }
     .form-container input[type="text"], 
     .form-container input[type="password"], 
-    .form-container input[type="submit"], 
+    .form-container input[type="submit"],
+    .form-container input[type="number"],
     .form-container textarea {
       width: 100%;
       padding: 10px;
@@ -166,6 +171,10 @@ void ConfigPortal::servePortal(AsyncWebServerRequest* request) {
       box-sizing: border-box;
       color: #888;
       font-weight: normal;
+    }
+    .form-container select,
+    .form-container input[type="number"]{
+      width: 35%;
     }
     .form-container input[type="text"]:focus, 
     .form-container input[type="password"]:focus, 
