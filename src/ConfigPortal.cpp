@@ -162,6 +162,7 @@ void ConfigPortal::servePortal(AsyncWebServerRequest* request) {
     .form-container input[type="password"], 
     .form-container input[type="submit"],
     .form-container input[type="number"],
+    .form-container select,
     .form-container textarea {
       width: 100%;
       padding: 10px;
@@ -171,6 +172,7 @@ void ConfigPortal::servePortal(AsyncWebServerRequest* request) {
       box-sizing: border-box;
       color: #888;
       font-weight: normal;
+      white-space: normal;
     }
     .form-container select,
     .form-container input[type="number"]{
@@ -182,7 +184,9 @@ void ConfigPortal::servePortal(AsyncWebServerRequest* request) {
       outline: none;
     }
     .form-container input[type="text"]:not(:placeholder-shown), 
-    .form-container input[type="password"]:not(:placeholder-shown), 
+    .form-container input[type="password"]:not(:placeholder-shown),
+    .form-container input[type="number"]:not(:placeholder-shown),
+    .form-container select:not(:placeholder-shown), 
     .form-container textarea:not(:placeholder-shown) {
       color: #333;
       font-weight: bold;
@@ -221,6 +225,7 @@ void ConfigPortal::servePortal(AsyncWebServerRequest* request) {
       font-size: 1em;
       color: #888;
       margin-top: 5px;
+      font-stretch: condensed;
     }
     .footer {
       margin-top: 40px;
@@ -228,10 +233,10 @@ void ConfigPortal::servePortal(AsyncWebServerRequest* request) {
       color: #777;
     }
     .form-container textarea {
-      height: 100px;
+      height: 300px;
       resize: vertical;
-      font-family: Arial, sans-serif;
-      font-size: 1em;
+      font-family: monospace, Arial, sans-serif;
+      font-size: 0.9em;
     }
   </style>
   <script>
